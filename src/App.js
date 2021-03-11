@@ -1,17 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import HeaderBlock from "./components/HeaderBlock";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello World, React.JS!
-        </p>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <>
+    <HeaderBlock
+      title='This is Pokemon Card game'
+      descr='Simple Triple Triad Card game'
+    />
+    <HeaderBlock
+      title='This is Pokemon Card game'
+      hideBackground
+    />
+  </>
+)
 
 export default App;
