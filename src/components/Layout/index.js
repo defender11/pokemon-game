@@ -4,11 +4,11 @@ const Layout = ({title, descr, urlBg = '', colorBg = ''}) => {
   let bg = {};
 
   if (urlBg !== '') {
-    bg = {background: `url(${urlBg})`};
+    bg = {backgroundImage: `url(${urlBg})`};
   }
 
   if (colorBg !== '') {
-    bg = {background: colorBg, ...bg};
+    bg = {backgroundColor: colorBg, ...bg};
   }
 
   return (
