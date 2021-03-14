@@ -1,16 +1,20 @@
-import HeaderBlock from "./components/HeaderBlock";
+import Header from "./components/Header";
+import Layout from "./components/Layout";
+import Footer from "./components/Footer";
 
-const App = () => (
-  <>
-    <HeaderBlock
-      title='This is Pokemon Card game'
-      descr='Simple Triple Triad Card game'
-    />
-    <HeaderBlock
-      title='This is Pokemon Card game'
-      hideBackground
-    />
-  </>
-)
+import bg1 from './assets/bg1.jpg';
+import bg2 from './assets/bg3.jpg';
+
+const App = () => {
+    return (
+      <>
+          <Header title='This is title' descr='This is Description!' />
+          <Layout title='Top title' urlBg={bg1}/>
+          <Layout title='Middle title' colorBg='#e2e2e2'/>
+          <Layout title='Bottom title' urlBg={bg2}/>
+          <Footer/>
+      </>
+    );
+}
 
 export default App;
