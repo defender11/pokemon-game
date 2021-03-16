@@ -1,6 +1,6 @@
 import s from './style.module.css';
 
-const Layout = ({title, descr, urlBg = '', colorBg = ''}) => {
+const Layout = ({title, urlBg = '', colorBg = '', children}, ) => {
   let bg = {};
 
   if (urlBg !== '') {
@@ -23,7 +23,7 @@ const Layout = ({title, descr, urlBg = '', colorBg = ''}) => {
             <span className="separator"/>
           </div>
           <div className="desc full">
-            {descr && <p>{descr}</p>}
+            {children}
           </div>
         </article>
       </div>
