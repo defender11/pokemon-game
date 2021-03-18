@@ -1,15 +1,44 @@
-import cn from 'classnames';
+import {useState} from 'react';
+import styles from "../Game/style.module.css";
+import POKEMONS from "../../pokemon_card_list";
+import PokemonCard from "../../components/PokemonCard";
+import Layout from "../../components/Layout";
 
-import s from './style.module.css'
+POKEMONS.map(itm => {
+  itm.isActive = false;
+  return itm
+})
 
 const GamePage = () => {
-  return (
-    <>
-      <div className={cn(s.root)}>
-        <h3>This is Game Page!</h3>
-      </div>
-    </>
-  );
-};
+    const [pokemons, setActive] = useState(POKEMONS);
+
+    const onClickBack = (id) => {
+      setActive((pok) => {
+          return pok.map(itm => {
+            if (id == itm.id) {
+              itm.isActive = !itm.isActive;
+            }
+            return itm;
+          });
+        }
+      )
+    }
+
+    return (
+      <Layout
+        title='The Game!'
+        colorBg='rgba(220, 204, 129, 0.52)'
+      >
+        <div className={styles.flex}>
+          {
+            pokemons.map(item => <PokemonCard key={item.id} onClickBack={onClickBack} isActive={item.isActive}
+                                              id={item.id} name={item.name} img={item.img} type={item.type}
+                                              values={item.values}/>)
+          }
+        </div>
+      </Layout>
+    );
+  }
+;
 
 export default GamePage;

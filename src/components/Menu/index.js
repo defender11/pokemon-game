@@ -10,7 +10,10 @@ const Menu = ({buttonState, onClickButton}) => {
   }
 
   return (
-    <div className={cn(s.menuContainer, {[s.active]: buttonState}, {[s.deactive]: !buttonState})}>
+    <div className={cn(s.menuContainer, {
+      [s.active]: buttonState,
+      [s.deactive]: !buttonState
+    })}>
       <div className={s.overlay}/>
       <div className={s.menuItems}>
         <ul>
