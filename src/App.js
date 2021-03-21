@@ -1,38 +1,51 @@
-import {useState} from 'react';
+import {useRouteMatch, Route, Switch, Redirect} from "react-router-dom";
+
 import HomePage from "./routes/Home";
 import GamePage from "./routes/Game";
+import AboutPage from "./routes/About";
+import ContactPage from "./routes/Contact";
+import NotFoundPage from "./routes/404"
+
 import MenuHeader from "./components/MenuHeader";
+import Footer from "./components/Footer";
+
+import s from './App.css'
+import cn from 'classnames'
 
 const App = () => {
-  const [page, setPage] = useState('home');
 
-  const handleChangePage = (page) => {
-    setPage && setPage(page);
-  }
+  const match = useRouteMatch('/');
 
-  switch (page) {
-    case 'home':
-      return (
+  return (
+    <Switch>
+      <Route>
         <>
-          <MenuHeader getPageName={handleChangePage}/>
-          <HomePage/>
+          <Switch>
+            <Route path="/404" exact component={NotFoundPage}/>
+          </Switch>
         </>
-      );
-    case 'game':
-      return (
         <>
-          <MenuHeader getPageName={handleChangePage}/>
-          <GamePage/>
+          <MenuHeader bgActive={!match.isExact}/>
+
+          <div className={cn(s.wrap, {
+            [s.isHomePage]: match.isExact
+          })}>
+            <Switch>
+              <Route path="/" exact component={HomePage}/>
+              <Route path="/home" component={HomePage}/>
+              <Route path="/game" component={GamePage}/>
+              <Route path="/about" component={AboutPage}/>
+              <Route path="/contact" component={ContactPage}/>
+
+              <Route render={() => <Redirect to="/404"/>}/>
+            </Switch>
+          </div>
+
+          <Footer/>
         </>
-      );
-    default:
-      return (
-        <>
-          <MenuHeader getPageName={handleChangePage}/>
-          <HomePage/>
-        </>
-      );
-  }
+      </Route>
+    </Switch>
+  )
 };
 
 export default App;

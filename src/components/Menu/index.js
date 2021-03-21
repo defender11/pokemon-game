@@ -1,26 +1,52 @@
 import cn from 'classnames';
+import {Link} from 'react-router-dom';
 
 import s from './style.module.css';
 
-const Menu = ({buttonState, onClickButton}) => {
+const menuList = [
+  {
+    title: 'HOME',
+    to: 'home'
+  },
+  {
+    title: 'GAME',
+    to: 'game'
+  },
+  {
+    title: 'ABOUT',
+    to: 'about'
+  },
+  {
+    title: 'CONTACT',
+    to: 'contact'
+  }
+];
 
-  const handleClick = function (e) {
-    const page = e.target.text.toLowerCase();
-    onClickButton && onClickButton(page);
+const Menu = ({swapButtonState, buttonState}) => {
+
+  const handleClick = () => {
+    swapButtonState && swapButtonState(!buttonState);
   }
 
   return (
     <div className={cn(s.menuContainer, {
-      [s.active]: buttonState,
-      [s.deactive]: !buttonState
+      [s.active]: buttonState !== false,
+      [s.deactive]: !buttonState === false
     })}>
       <div className={s.overlay}/>
       <div className={s.menuItems}>
         <ul>
-          <li><a onClick={handleClick} href={s.welcome}>HOME</a></li>
-          <li><a onClick={handleClick} href={s.game}>GAME</a></li>
-          <li><a onClick={handleClick} href={s.about}>ABOUT</a></li>
-          <li><a onClick={handleClick} href={s.contact}>CONTACT</a></li>
+          {
+            menuList.map(
+              ({title, to}, index) => (
+              <li key={index}>
+                <Link
+                  to={to}
+                  onClick={handleClick}
+                >{title}</Link>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>

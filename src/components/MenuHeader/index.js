@@ -4,26 +4,22 @@ import Menu from "../Menu";
 import NavBar from "../NavBar";
 
 
-const MenuHeader = ({getPageName}) => {
+const MenuHeader = ({bgActive}) => {
   const [isActiveNavButton, setActiveNavButton] = useState(false);
 
   const handleClickButtonNavBar = () => {
     setActiveNavButton(!isActiveNavButton);
   }
 
-  const onChangePage = (page) => {
-    getPageName && getPageName(page);
-    handleClickButtonNavBar();
-  }
-
   return (
     <>
       <Menu
         buttonState={isActiveNavButton}
-        onClickButton={onChangePage}
+        swapButtonState={handleClickButtonNavBar}
       />
       <NavBar
         onClickButton={handleClickButtonNavBar}
+        bgActive={bgActive}
         buttonState={isActiveNavButton}
       />
     </>
