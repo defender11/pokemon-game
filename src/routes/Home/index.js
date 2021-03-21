@@ -1,7 +1,6 @@
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import PokemonCard from "../../components/PokemonCard";
-import Footer from "../../components/Footer";
 
 import bg1 from '../../assets/bg1.jpg';
 import bg2 from '../../assets/bg3.jpg';
@@ -40,7 +39,6 @@ const HomePage = () => {
         </div>
       </Layout>
       <Layout title='Bottom title' urlBg={bg2}/>
-      <Footer/>
     </>
   );
 }

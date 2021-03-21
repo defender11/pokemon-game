@@ -15,7 +15,7 @@
 
 .root article {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
     grid-gap: 1rem;
     padding: 3rem 0;
 }

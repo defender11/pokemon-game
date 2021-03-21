@@ -1,5 +1,15 @@
-.root {
-  background-color: #827c7c;
-  height: 100vh;
-  color: white;
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    min-height: calc(100vh - 100px);
+    padding: 96px 32px 24px;
+}
+
+.wrap.isHomePage {
+    padding: 0;
 }

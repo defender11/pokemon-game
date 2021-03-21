@@ -1,25 +1,24 @@
-import {useState} from 'react';
 import cn from 'classnames';
 
 import s from './style.module.css';
 
-const NavBar = ({buttonState = false, onClickButton}) => {
-  const [isActive, setActive] = useState(buttonState);
-
+const NavBar = ({buttonState = false, bgActive, onClickButton}) => {
   const handleClick = () => {
-    setActive(!buttonState);
-    onClickButton && onClickButton(buttonState);
+    onClickButton && onClickButton(!buttonState);
   }
 
   return (
-    <nav className={cn(s.root)}>
+    <nav id={s.navbar} className={cn(s.root, {[s.bgActive]: bgActive})}>
       <div className={cn(s.navWrapper)}>
         <p className={cn(s.brand)}>
           LOGO
         </p>
-        <button className={cn(s.menuButton, {[s.active]: isActive})} onClick={handleClick}>
+        <div
+          className={cn(s.menuButton, {[s.active]: buttonState})}
+          onClick={handleClick}
+        >
           <span/>
-        </button>
+        </div>
       </div>
     </nav>
   );
