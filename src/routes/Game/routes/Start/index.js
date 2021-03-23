@@ -1,4 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import s from "./style.module.css";
 
 import PokemonCard from "../../../../components/PokemonCard";
@@ -10,7 +11,7 @@ import {PokemonContext} from "../../../../services/PokemonContext";
 const StartPage = () => {
     const firebase = useContext(FirebaseContext);
     const pokemonContext = useContext(PokemonContext);
-    console.log(pokemonContext)
+    const history = useHistory();
     const [pokemons, setPokemons] = useState({});
 
     useEffect(() => {
@@ -22,7 +23,8 @@ const StartPage = () => {
     }, []);
 
     const onClickCardTurn = (key) => {
-      pokemonContext.onSelectedPokemons(key);
+      const pokemon = {...pokemons[key]};
+      pokemonContext.onSelectedPokemons(key, pokemon);
 
       setPokemons(prevState => ({
         ...prevState,
@@ -33,13 +35,20 @@ const StartPage = () => {
       }))
     };
 
+    const handlerStartClickGame = () => {
+      history.push('/game/board');
+    }
+
     return (
       <Layout
         title='The Game!'
         colorBg='rgba(220, 204, 129, 0.52)'
       >
         <div className={s.flex}>
-          <button>Start Game</button>
+          <button
+            onClick={handlerStartClickGame}
+            disabled={Object.keys(pokemonContext.pokemons).length < 5}
+          >Start Game</button>
         </div>
         <div className={s.flex}>
           {
@@ -48,7 +57,7 @@ const StartPage = () => {
                 className={s.card}
                 key={key}
 
-                isActive={true}
+                isActive
                 isSelected={selected}
                 id={id}
                 name={name}
@@ -56,7 +65,11 @@ const StartPage = () => {
                 type={type}
                 values={values}
 
-                onClickCardTurn={() => onClickCardTurn(key)}
+                onClickCardTurn={() => {
+                  if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
+                    onClickCardTurn(key);
+                  }
+                }}
               />
             )
           }
