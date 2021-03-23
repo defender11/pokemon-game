@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import {useRouteMatch, Route, Switch, Redirect} from "react-router-dom";
 
 import HomePage from "./routes/Home";
@@ -9,8 +10,7 @@ import NotFoundPage from "./routes/404"
 import MenuHeader from "./components/MenuHeader";
 import Footer from "./components/Footer";
 
-import s from './App.css'
-import cn from 'classnames'
+import s from './App.css';
 
 const App = () => {
 
